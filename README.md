@@ -2,7 +2,7 @@
 
 [Home screen](./assets/screenshots/screenshot_home.jpg)
 [Category select screen](./assets/screenshots/screenshot_category_select.png)
-[Article details screen](./assets/screenshots/screenshot_article_details.png)
+https://github.com/Nordoub/RN-infowijs-frontend-project/blob/main/assets/screenshots/screenshot_article_details.png
 [Search screen](./assets/screenshots/screenshot_search.png)
 
 A React Native application built using expo.
