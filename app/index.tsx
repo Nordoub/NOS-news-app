@@ -4,7 +4,6 @@ import {
   useWindowDimensions,
   ScrollView,
   FlatList,
-  Pressable,
 } from "react-native";
 import { router, Stack } from "expo-router";
 import useGetFeedQuery from "@/hooks/useGetFeedQuery";
@@ -20,9 +19,7 @@ import Divider from "@/components/Divider";
 import { useState } from "react";
 import BottomSheet from "@/components/BottomSheet";
 import Category from "@/components/Category";
-import AntDesign from "@expo/vector-icons/AntDesign";
-import Feather from "@expo/vector-icons/Feather";
-import { COLORS, DEFAULT_HITSLOP } from "@/constants/theme";
+import Icon from "@/components/Icon";
 
 const HomeScreen = () => {
   const [sheetVisible, setSheetVisible] = useState<boolean>(false);
@@ -43,18 +40,12 @@ const HomeScreen = () => {
         name="index"
         options={{
           headerBackTitle: "Home",
-          headerLeft: () => (
-            <Pressable onPressIn={toggleSheet} hitSlop={DEFAULT_HITSLOP}>
-              <Feather name="menu" size={24} color={COLORS.grey} />
-            </Pressable>
-          ),
+          headerLeft: () => <Icon name="menu-outline" onPress={toggleSheet} />,
           headerRight: () => (
-            <Pressable
+            <Icon
+              name="search-outline"
               onPress={() => router.push("/search")}
-              hitSlop={DEFAULT_HITSLOP}
-            >
-              <AntDesign name="search1" size={24} color={COLORS.grey} />
-            </Pressable>
+            />
           ),
           headerTitleAlign: "center",
           headerTitle: () => (
