@@ -4,6 +4,7 @@ import {
   useWindowDimensions,
   ScrollView,
   FlatList,
+  RefreshControl,
 } from "react-native";
 import { router, Stack } from "expo-router";
 import useGetFeedQuery from "@/hooks/useGetFeedQuery";
@@ -24,7 +25,7 @@ import Icon from "@/components/Icon";
 const HomeScreen = () => {
   const [sheetVisible, setSheetVisible] = useState<boolean>(false);
   const { selectedCategory, setSelectedCategory } = useFeedContext();
-  const { data: feed } = useGetFeedQuery(selectedCategory);
+  const { data: feed, isFetching, refetch } = useGetFeedQuery(selectedCategory);
   const { height } = useWindowDimensions();
   const options = Object.keys(categories);
   const { headerArticle, subArticles, remainingArticles } = useDivideArticles(
@@ -56,7 +57,11 @@ const HomeScreen = () => {
           ),
         }}
       />
-      <ScrollView>
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={isFetching} onRefresh={refetch} />
+        }
+      >
         <HeaderArticle
           imgUrl={headerArticle.image ?? null}
           title={headerArticle.title ?? ""}
