@@ -133,7 +133,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 36,
     alignItems: "center",
-    backgroundColor: "red",
   },
   listStyle: {
     gap: 10,

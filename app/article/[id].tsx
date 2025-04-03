@@ -21,11 +21,7 @@ const ArticleDetailsScreen = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <StatusBar
-        translucent={true}
-        backgroundColor={"transparent"}
-        barStyle={"light-content"}
-      />
+      <StatusBar barStyle={"light-content"} />
       <TouchableOpacity
         style={styles.backButton}
         hitSlop={DEFAULT_HITSLOP}
