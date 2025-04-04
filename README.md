@@ -24,4 +24,4 @@ npm install
 npm start
 ```
 
-2. Scan the QR code that appears in the terminal to build the application. You will need the Expo GO app from the App store / play store for this.
+2. Scan the QR code that appears in the terminal to build the application. You will need the Expo GO app from the App store / play store for this, or simply press i to open the iphone simulator, and a to open the android simulator.
