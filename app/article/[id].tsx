@@ -13,6 +13,7 @@ import { router, useLocalSearchParams } from "expo-router";
 import Image from "@/components/Image";
 import { COLORS, DEFAULT_HITSLOP, FONT_SIZES } from "@/constants/theme";
 import Entypo from "@expo/vector-icons/Entypo";
+import Gradient from "@/components/Gradient";
 
 const ArticleDetailsScreen = () => {
   const { height } = useWindowDimensions();
@@ -29,11 +30,14 @@ const ArticleDetailsScreen = () => {
       >
         <Entypo name="chevron-small-left" size={48} color={COLORS.white} />
       </TouchableOpacity>
-      <Image
-        source={article?.image}
-        style={{ height: height / 3, resizeMode: "cover" }}
-        transition={150}
-      />
+      <View>
+        <Image
+          source={article?.image}
+          style={{ height: height / 3, resizeMode: "cover" }}
+          transition={150}
+        />
+        <Gradient startFrom="top" />
+      </View>
       <View style={styles.textContent}>
         <Text style={styles.date}>{article?.pubDate}</Text>
         <Text style={styles.title}>{article?.title}</Text>
