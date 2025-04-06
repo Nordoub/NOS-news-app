@@ -9,7 +9,9 @@ const useFilteredArticles = (searchValue: string) => {
   const searchResults = useMemo(() => {
     if (!searchValue) return feed?.items;
 
-    return feed?.items.filter((item) => item.title.includes(searchValue));
+    return feed?.items.filter((item) =>
+      item.title.toLowerCase().includes(searchValue.toLowerCase())
+    );
   }, [searchValue, feed]);
 
   return searchResults;
