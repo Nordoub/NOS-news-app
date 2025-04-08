@@ -1,4 +1,4 @@
-# Infowijs Frontend Assignment
+# NOS news app
 
 [Home screen](./assets/screenshots/screenshot_home.jpg)
 [Category select screen](./assets/screenshots/screenshot_category_select.png)
