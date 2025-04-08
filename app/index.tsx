@@ -47,7 +47,7 @@ const HomeScreen = () => {
       {/* Header options */}
       <Stack.Screen options={{ headerLeft }} />
 
-      {/* Articles*/}
+      {/* Articles */}
       <LegendList
         data={remainingArticles}
         estimatedItemSize={110}
@@ -64,6 +64,7 @@ const HomeScreen = () => {
         }
         ListHeaderComponent={listHeader}
       />
+
       {/* Category selector */}
       <BottomSheet
         visible={sheetVisible}
