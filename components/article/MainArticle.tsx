@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text } from "react-native";
+import { Pressable, PressableProps, StyleSheet, Text } from "react-native";
 import React, { memo } from "react";
 import Image from "@/components/Image";
 import { COLORS, FONT_SIZES } from "@/constants/theme";
@@ -9,10 +9,11 @@ type Props = {
   article: Article;
   height?: number;
   onPress?: () => void;
-};
-const MainArticle = ({ onPress, article, height = 250 }: Props) => {
+} & PressableProps;
+
+const MainArticle = ({ onPress, article, height = 250, ...props }: Props) => {
   return (
-    <Pressable onPress={onPress}>
+    <Pressable onPress={onPress} {...props}>
       <Image
         source={article.image}
         style={{ height, resizeMode: "cover" }}

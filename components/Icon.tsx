@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet } from "react-native";
+import { Pressable, PressableProps, StyleSheet } from "react-native";
 import React, { ComponentProps } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { DEFAULT_HITSLOP } from "@/constants/theme";
@@ -10,10 +10,21 @@ type IconProps = {
   color?: string;
   size?: number;
   onPress?: () => void;
-};
-const Icon = ({ onPress, name, color = "grey", size = 24 }: IconProps) => {
+} & PressableProps;
+
+const Icon = ({
+  onPress,
+  name,
+  color = "grey",
+  size = 24,
+  ...pressableProps
+}: IconProps) => {
   return (
-    <Pressable hitSlop={DEFAULT_HITSLOP} onPressIn={onPress}>
+    <Pressable
+      hitSlop={DEFAULT_HITSLOP}
+      onPressIn={onPress}
+      {...pressableProps}
+    >
       <Ionicons name={name} size={size} color={color} />
     </Pressable>
   );

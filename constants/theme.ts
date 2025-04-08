@@ -35,7 +35,7 @@ export const COLORS = {
   darkgrey: "#636363",
   unfocused: "#A4A4A4",
   focused: "orange",
-  blue: "#0047AB",
+  blue: "#1E90FF",
 };
 
 export const BORDER = {

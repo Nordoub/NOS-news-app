@@ -1,9 +1,12 @@
-import { StyleSheet, View } from "react-native";
+import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import React, { PropsWithChildren } from "react";
 import { SPACING } from "@/constants/theme";
 
-const Row = ({ children }: PropsWithChildren) => {
-  return <View style={styles.row}>{children}</View>;
+type Props = {
+  style?: StyleProp<ViewStyle>;
+};
+const Row = ({ children, style }: PropsWithChildren<Props>) => {
+  return <View style={[styles.row, style]}>{children}</View>;
 };
 
 export default Row;

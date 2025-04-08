@@ -27,10 +27,7 @@ export default function RootLayout() {
               }}
             />
             <Stack.Screen name="search" options={{ title: "Search" }} />
-            <Stack.Screen
-              name="article/[id]"
-              options={{ headerShown: false }}
-            />
+            <Stack.Screen name="article/[id]" />
           </Stack>
         </FeedProvider>
       </QueryClientProvider>

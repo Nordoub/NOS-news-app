@@ -23,6 +23,7 @@ const SearchScreen = () => {
     <Screen>
       <Stack.Screen
         options={{
+          headerTitle: "",
           headerSearchBarOptions: {
             placeholder: "Search",
             autoFocus: true,

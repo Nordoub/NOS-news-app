@@ -12,6 +12,7 @@ import Category from "@/components/Category";
 import Icon from "@/components/Icon";
 import { LegendList } from "@legendapp/list";
 import HeaderArticles from "@/components/article/HeaderArticles";
+import Divider from "@/components/Divider";
 
 const HomeScreen = () => {
   const [sheetVisible, setSheetVisible] = useState<boolean>(false);
@@ -63,6 +64,7 @@ const HomeScreen = () => {
           <RefreshControl refreshing={isFetching} onRefresh={refetch} />
         }
         ListHeaderComponent={listHeader}
+        ItemSeparatorComponent={() => <Divider style={styles.divider} />}
       />
 
       {/* Category selector */}
@@ -105,5 +107,8 @@ const styles = StyleSheet.create({
   listStyle: {
     gap: 10,
     marginTop: 30,
+  },
+  divider: {
+    marginVertical: 5,
   },
 });

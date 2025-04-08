@@ -11,7 +11,7 @@ type Props = {
   onPress?: () => void;
 };
 
-const Article = ({ onPress, article, height = 100, width = 100 }: Props) => {
+const Article = ({ onPress, article, height = 80, width = 100 }: Props) => {
   return (
     <Pressable style={styles.container} onPress={onPress}>
       <Image
