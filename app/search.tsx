@@ -5,9 +5,9 @@ import {
   StyleSheet,
 } from "react-native";
 import React, { useState } from "react";
-import { router, Stack, useRouter } from "expo-router";
+import { router, Stack } from "expo-router";
 import useFilteredArticles from "@/hooks/useFilteredArticles";
-import Article from "@/components/Article";
+import Article from "@/components/article/Article";
 import Screen from "@/components/Screen";
 
 const SearchScreen = () => {
@@ -23,25 +23,21 @@ const SearchScreen = () => {
     <Screen>
       <Stack.Screen
         options={{
-          title: "Search",
           headerSearchBarOptions: {
             placeholder: "Search",
-            onChangeText: onChangeText,
             autoFocus: true,
-            onCancelButtonPress: onClearText,
+            onChangeText: onChangeText,
             onClose: onClearText,
+            onCancelButtonPress: onClearText,
           },
         }}
       />
       <FlatList
         data={searchResults}
-        renderItem={({ item }) => (
+        renderItem={({ item: article }) => (
           <Article
-            imgUrl={item?.image ?? null}
-            title={item?.title ?? ""}
-            height={100}
-            width={100}
-            onPress={() => router.push(`/article/${item.guid}`)}
+            article={article}
+            onPress={() => router.push(`/article/${article.guid}`)}
           />
         )}
         style={styles.list}

@@ -1,97 +1,70 @@
-import {
-  View,
-  StyleSheet,
-  useWindowDimensions,
-  ScrollView,
-  FlatList,
-  RefreshControl,
-} from "react-native";
+import { StyleSheet, FlatList, RefreshControl } from "react-native";
 import { router, Stack } from "expo-router";
 import useGetFeedQuery from "@/hooks/useGetFeedQuery";
 import { categories } from "@/constants/config";
 import { useFeedContext } from "@/hooks/useFeedContext";
 import Screen from "@/components/Screen";
-import Image from "@/components/Image";
-import HeaderArticle from "@/components/HeaderArticle";
-import SubArticle from "@/components/SubArticle";
 import useDivideArticles from "@/hooks/useDivideArticles";
-import Article from "@/components/Article";
-import Divider from "@/components/Divider";
-import { useState } from "react";
+import Article from "@/components/article/Article";
+import { useCallback, useState } from "react";
 import BottomSheet from "@/components/BottomSheet";
 import Category from "@/components/Category";
 import Icon from "@/components/Icon";
+import { LegendList } from "@legendapp/list";
+import HeaderArticles from "@/components/article/HeaderArticles";
 
 const HomeScreen = () => {
   const [sheetVisible, setSheetVisible] = useState<boolean>(false);
   const { selectedCategory, setSelectedCategory } = useFeedContext();
   const { data: feed, isFetching, refetch } = useGetFeedQuery(selectedCategory);
-  const { height } = useWindowDimensions();
   const options = Object.keys(categories);
-  const { headerArticle, subArticles, remainingArticles } = useDivideArticles(
+  const { mainArticle, subArticles, remainingArticles } = useDivideArticles(
     feed?.items ?? []
   );
 
   const closeSheet = () => setSheetVisible(false);
   const toggleSheet = () => setSheetVisible((bool) => !bool);
+  const goToArticle = (id: string) => router.push(`/article/${id}`);
+
+  const headerLeft = useCallback(
+    () => <Icon name="menu-outline" onPress={toggleSheet} />,
+    []
+  );
+
+  const listHeader = useCallback(
+    () => (
+      <HeaderArticles
+        mainArticle={mainArticle}
+        subArticles={subArticles}
+        goToArticle={goToArticle}
+      />
+    ),
+    [mainArticle, subArticles]
+  );
 
   return (
     <Screen>
-      <Stack.Screen
-        name="index"
-        options={{
-          headerBackTitle: "Home",
-          headerLeft: () => <Icon name="menu-outline" onPress={toggleSheet} />,
-          headerRight: () => (
-            <Icon
-              name="search-outline"
-              onPress={() => router.push("/search")}
-            />
-          ),
-          headerTitleAlign: "center",
-          headerTitle: () => (
-            <Image
-              source={require("@/assets/images/logo-small.png")}
-              contentFit="contain"
-            />
-          ),
-        }}
-      />
-      <ScrollView
+      {/* Header options */}
+      <Stack.Screen options={{ headerLeft }} />
+
+      {/* Articles*/}
+      <LegendList
+        data={remainingArticles}
+        estimatedItemSize={110}
+        recycleItems
+        keyExtractor={(item) => item.guid}
+        renderItem={({ item: article }) => (
+          <Article
+            article={article}
+            onPress={() => goToArticle(article.guid)}
+          />
+        )}
         refreshControl={
           <RefreshControl refreshing={isFetching} onRefresh={refetch} />
         }
-      >
-        <HeaderArticle
-          imgUrl={headerArticle.image ?? null}
-          title={headerArticle.title ?? ""}
-          height={height / 3}
-          onPress={() => router.push(`/article/${headerArticle.guid}`)}
-        />
-        <View style={styles.subArticles}>
-          {subArticles.map((article, index) => (
-            <SubArticle
-              key={`${article.guid}${index}`}
-              imgUrl={article.image}
-              title={article.title}
-              height={height / 6}
-              onPress={() => router.push(`/article/${article.guid}`)}
-            />
-          ))}
-        </View>
-        {remainingArticles.map((article) => (
-          <View key={article.guid} style={{ marginHorizontal: 10 }}>
-            <Divider style={{ marginVertical: 10 }} />
-            <Article
-              imgUrl={article.image}
-              title={article.title}
-              height={100}
-              width={100}
-              onPress={() => router.push(`/article/${article.guid}`)}
-            />
-          </View>
-        ))}
-      </ScrollView>
+        ListHeaderComponent={listHeader}
+      />
+      {/* Category selector */}
       <BottomSheet
         visible={sheetVisible}
         hideHandle
@@ -123,12 +96,6 @@ const HomeScreen = () => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-  subArticles: {
-    flexDirection: "row",
-    gap: 10,
-    margin: 10,
-    justifyContent: "space-between",
-  },
   contentContainer: {
     flex: 1,
     padding: 36,

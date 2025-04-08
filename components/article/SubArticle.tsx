@@ -1,24 +1,24 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 import React, { memo } from "react";
 import Image from "@/components/Image";
-import { FONT_SIZES } from "@/constants/theme";
+import { FONT_SIZES, SPACING } from "@/constants/theme";
+import { Article } from "@/models/article";
 
 type Props = {
-  imgUrl: string | null;
-  title: string;
+  article: Article;
   height?: number;
   onPress?: () => void;
 };
 
-const SubArticle = ({ onPress, imgUrl, height = 300, title }: Props) => {
+const SubArticle = ({ onPress, article, height = 125 }: Props) => {
   return (
     <Pressable style={{ flex: 1 }} onPress={onPress}>
       <Image
-        source={imgUrl}
+        source={article.image}
         style={{ height, borderRadius: 5 }}
         transition={150}
       />
-      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.title}>{article.title}</Text>
     </Pressable>
   );
 };
@@ -27,7 +27,7 @@ export default memo(SubArticle);
 
 const styles = StyleSheet.create({
   title: {
-    margin: 5,
+    margin: SPACING.x2s,
     fontSize: FONT_SIZES.s,
     fontWeight: "500",
   },

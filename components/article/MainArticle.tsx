@@ -2,29 +2,30 @@ import { Pressable, StyleSheet, Text } from "react-native";
 import React, { memo } from "react";
 import Image from "@/components/Image";
 import { COLORS, FONT_SIZES } from "@/constants/theme";
-import Gradient from "./Gradient";
+import Gradient from "../Gradient";
+import { Article } from "@/models/article";
 
 type Props = {
-  imgUrl: string | null;
-  title?: string;
+  article: Article;
   height?: number;
   onPress?: () => void;
 };
-const HeaderArticle = ({ onPress, imgUrl, title, height = 300 }: Props) => {
+const MainArticle = ({ onPress, article, height = 250 }: Props) => {
+  console.log("MainArticle");
   return (
     <Pressable onPress={onPress}>
       <Image
-        source={imgUrl}
+        source={article.image}
         style={{ height, resizeMode: "cover" }}
         transition={150}
       />
       <Gradient />
-      {title && <Text style={styles.title}>{title}</Text>}
+      {article.title && <Text style={styles.title}>{article.title}</Text>}
     </Pressable>
   );
 };
 
-export default memo(HeaderArticle);
+export default memo(MainArticle);
 
 const styles = StyleSheet.create({
   title: {

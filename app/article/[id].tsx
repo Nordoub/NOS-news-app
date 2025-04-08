@@ -1,4 +1,5 @@
 import {
+  Platform,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     position: "absolute",
-    top: 40,
+    top: Platform.select({ ios: 40, android: 10 }),
     left: 5,
     zIndex: 20,
   },

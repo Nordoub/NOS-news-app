@@ -1,30 +1,25 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 import React, { memo } from "react";
 import Image from "@/components/Image";
+import { Article as ArticleType } from "@/models/article";
+import { SPACING } from "@/constants/theme";
 
 type Props = {
-  imgUrl: string | null;
-  title: string;
+  article: ArticleType;
   height?: number;
   width?: number;
   onPress?: () => void;
 };
 
-const Article = ({
-  onPress,
-  imgUrl,
-  title,
-  height = 100,
-  width = 100,
-}: Props) => {
+const Article = ({ onPress, article, height = 100, width = 100 }: Props) => {
   return (
     <Pressable style={styles.container} onPress={onPress}>
       <Image
-        source={imgUrl}
+        source={article.image}
         style={{ height, width, borderRadius: 5 }}
         transition={150}
       />
-      <Text style={{ flex: 1, fontWeight: "500" }}>{title}</Text>
+      <Text style={{ flex: 1, fontWeight: "500" }}>{article.title}</Text>
     </Pressable>
   );
 };
@@ -36,5 +31,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 10,
+    marginHorizontal: 10,
+    marginVertical: 5,
   },
 });
