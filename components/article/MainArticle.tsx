@@ -11,7 +11,6 @@ type Props = {
   onPress?: () => void;
 };
 const MainArticle = ({ onPress, article, height = 250 }: Props) => {
-  console.log("MainArticle");
   return (
     <Pressable onPress={onPress}>
       <Image
