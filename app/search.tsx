@@ -34,6 +34,7 @@ const SearchScreen = () => {
         }}
       />
       <FlatList
+        keyboardDismissMode="on-drag"
         data={searchResults}
         renderItem={({ item: article }) => (
           <Article
