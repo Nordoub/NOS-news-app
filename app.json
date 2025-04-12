@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "RN-infowijs-frontend-project",
-    "slug": "RN-infowijs-frontend-project",
+    "name": "nos-news-app",
+    "slug": "nos-news-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/logo-small.png",
