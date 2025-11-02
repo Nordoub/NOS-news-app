@@ -1,6 +1,10 @@
+import { Platform } from "react-native";
 import { Category } from "../models/category";
 
 export const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+
+export const isLiquidGlass =
+  Platform.OS === "ios" && parseInt(Platform.Version, 10) >= 26;
 
 export const categories: { [key: string]: Category } = {
   Algemeen: "nosnieuwsalgemeen",

@@ -1,7 +1,13 @@
-import { Pressable, PressableProps, StyleSheet } from "react-native";
-import React, { ComponentProps } from "react";
-import { Ionicons } from "@expo/vector-icons";
 import { DEFAULT_HITSLOP } from "@/constants/theme";
+import { Ionicons } from "@expo/vector-icons";
+import React, { ComponentProps } from "react";
+import {
+  Pressable,
+  PressableProps,
+  StyleProp,
+  StyleSheet,
+  ViewStyle,
+} from "react-native";
 
 type IoniconsNames = ComponentProps<typeof Ionicons>["name"];
 
@@ -17,12 +23,14 @@ const Icon = ({
   name,
   color = "grey",
   size = 24,
+  style,
   ...pressableProps
 }: IconProps) => {
   return (
     <Pressable
       hitSlop={DEFAULT_HITSLOP}
       onPressIn={onPress}
+      style={[styles.container, style as StyleProp<ViewStyle>]}
       {...pressableProps}
     >
       <Ionicons name={name} size={size} color={color} />
@@ -32,4 +40,9 @@ const Icon = ({
 
 export default Icon;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});

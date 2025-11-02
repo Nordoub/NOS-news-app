@@ -1,9 +1,9 @@
-import { router, Stack } from "expo-router";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import FeedProvider from "@/context/FeedProvider";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import Logo from "@/components/Logo";
 import Icon from "@/components/Icon";
+import Logo from "@/components/Logo";
+import FeedProvider from "@/context/FeedProvider";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { router, Stack } from "expo-router";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +22,7 @@ export default function RootLayout() {
                   <Icon
                     name="search-outline"
                     onPress={() => router.push("/search")}
+                    style={{ height: 36, width: 36 }}
                   />
                 ),
               }}

@@ -1,23 +1,25 @@
-import { StyleSheet, FlatList, RefreshControl } from "react-native";
-import { router, Stack } from "expo-router";
-import useGetFeedQuery from "@/hooks/useGetFeedQuery";
-import { categories } from "@/constants/config";
-import { useFeedContext } from "@/hooks/useFeedContext";
-import Screen from "@/components/Screen";
-import useDivideArticles from "@/hooks/useDivideArticles";
 import Article from "@/components/article/Article";
-import { useCallback, useState } from "react";
+import HeaderArticles from "@/components/article/HeaderArticles";
 import BottomSheet from "@/components/BottomSheet";
 import Category from "@/components/Category";
-import Icon from "@/components/Icon";
-import { LegendList } from "@legendapp/list";
-import HeaderArticles from "@/components/article/HeaderArticles";
 import Divider from "@/components/Divider";
+import Icon from "@/components/Icon";
+import Screen from "@/components/Screen";
+import { categories } from "@/constants/config";
+import useDivideArticles from "@/hooks/useDivideArticles";
+import { useFeedContext } from "@/hooks/useFeedContext";
+import useGetFeedQuery from "@/hooks/useGetFeedQuery";
+import { LegendList } from "@legendapp/list";
+import { useIsFocused } from "@react-navigation/native";
+import { router, Stack } from "expo-router";
+import { useState } from "react";
+import { FlatList, RefreshControl, StyleSheet } from "react-native";
 
 const HomeScreen = () => {
   const [sheetVisible, setSheetVisible] = useState<boolean>(false);
   const { selectedCategory, setSelectedCategory } = useFeedContext();
   const { data: feed, isFetching, refetch } = useGetFeedQuery(selectedCategory);
+  const isFocused = useIsFocused();
   const options = Object.keys(categories);
   const { mainArticle, subArticles, remainingArticles } = useDivideArticles(
     feed?.items ?? []
@@ -27,20 +29,16 @@ const HomeScreen = () => {
   const toggleSheet = () => setSheetVisible((bool) => !bool);
   const goToArticle = (id: string) => router.push(`/article/${id}`);
 
-  const headerLeft = useCallback(
-    () => <Icon name="menu-outline" onPress={toggleSheet} />,
-    []
+  const headerLeft = () => (
+    <Icon name="menu-outline" onPress={toggleSheet} style={styles.headerLeft} />
   );
 
-  const listHeader = useCallback(
-    () => (
-      <HeaderArticles
-        mainArticle={mainArticle}
-        subArticles={subArticles}
-        goToArticle={goToArticle}
-      />
-    ),
-    [mainArticle, subArticles]
+  const listHeader = () => (
+    <HeaderArticles
+      mainArticle={mainArticle}
+      subArticles={subArticles}
+      goToArticle={goToArticle}
+    />
   );
 
   return (
@@ -61,7 +59,10 @@ const HomeScreen = () => {
           />
         )}
         refreshControl={
-          <RefreshControl refreshing={isFetching} onRefresh={refetch} />
+          <RefreshControl
+            refreshing={isFetching && isFocused}
+            onRefresh={refetch}
+          />
         }
         ListHeaderComponent={listHeader}
         ItemSeparatorComponent={() => <Divider style={styles.divider} />}
@@ -110,5 +111,9 @@ const styles = StyleSheet.create({
   },
   divider: {
     marginVertical: 5,
+  },
+  headerLeft: {
+    height: 36,
+    width: 36,
   },
 });

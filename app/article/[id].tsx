@@ -1,15 +1,16 @@
-import { Dimensions, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import Icon from "@/components/Icon";
+import { isLiquidGlass } from "@/constants/config";
+import { COLORS, FONT_SIZES } from "@/constants/theme";
 import useArticle from "@/hooks/useArticle";
 import { router, Stack, useLocalSearchParams } from "expo-router";
-import { COLORS, FONT_SIZES } from "@/constants/theme";
+import React from "react";
+import { Dimensions, StyleSheet, Text, View } from "react-native";
 import Animated, {
   interpolate,
   useAnimatedRef,
   useAnimatedStyle,
-  useScrollViewOffset,
+  useScrollOffset,
 } from "react-native-reanimated";
-import Icon from "@/components/Icon";
 
 const { height, width } = Dimensions.get("window");
 const IMG_HEIGHT = height / 3;
@@ -19,7 +20,7 @@ const ArticleDetailsScreen = () => {
   const article = useArticle(id);
 
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
-  const scrollOffset = useScrollViewOffset(scrollRef);
+  const scrollOffset = useScrollOffset(scrollRef);
 
   const imageAnimatedStyle = useAnimatedStyle(() => {
     return {
@@ -112,7 +113,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     borderRadius: 100,
-    backgroundColor: "white",
+    backgroundColor: isLiquidGlass ? "transparent" : "white",
     padding: 2,
   },
   date: {

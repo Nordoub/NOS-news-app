@@ -1,14 +1,14 @@
-import {
-  NativeSyntheticEvent,
-  TextInputFocusEventData,
-  FlatList,
-  StyleSheet,
-} from "react-native";
-import React, { useState } from "react";
-import { router, Stack } from "expo-router";
-import useFilteredArticles from "@/hooks/useFilteredArticles";
 import Article from "@/components/article/Article";
 import Screen from "@/components/Screen";
+import useFilteredArticles from "@/hooks/useFilteredArticles";
+import { router, Stack } from "expo-router";
+import React, { useState } from "react";
+import {
+  FlatList,
+  NativeSyntheticEvent,
+  StyleSheet,
+  TextInputFocusEventData,
+} from "react-native";
 
 const SearchScreen = () => {
   const [searchValue, setSearchValue] = useState<string>("");
@@ -24,6 +24,7 @@ const SearchScreen = () => {
       <Stack.Screen
         options={{
           headerTitle: "",
+          headerBackButtonDisplayMode: "generic",
           headerSearchBarOptions: {
             placeholder: "Search",
             autoFocus: true,
