@@ -1,4 +1,3 @@
-import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Image from "./Image";
 
@@ -12,5 +11,3 @@ const Logo = () => {
 };
 
 export default Logo;
-
-const styles = StyleSheet.create({});

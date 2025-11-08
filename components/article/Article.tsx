@@ -1,8 +1,7 @@
-import { Pressable, StyleSheet, Text } from "react-native";
-import React, { memo } from "react";
 import Image from "@/components/Image";
 import { Article as ArticleType } from "@/models/article";
-import { SPACING } from "@/constants/theme";
+import React, { memo } from "react";
+import { Pressable, StyleSheet, Text } from "react-native";
 
 type Props = {
   article: ArticleType;

@@ -2,12 +2,14 @@ import Icon from "@/components/Icon";
 import Logo from "@/components/Logo";
 import FeedProvider from "@/context/FeedProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { router, Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const queryClient = new QueryClient();
 
 export default function RootLayout() {
+  const router = useRouter();
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <QueryClientProvider client={queryClient}>
@@ -21,7 +23,7 @@ export default function RootLayout() {
                 headerRight: () => (
                   <Icon
                     name="search-outline"
-                    onPress={() => router.push("/search")}
+                    onPress={() => router.navigate("/search")}
                     style={{ height: 36, width: 36 }}
                   />
                 ),

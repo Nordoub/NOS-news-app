@@ -10,16 +10,14 @@ import useDivideArticles from "@/hooks/useDivideArticles";
 import { useFeedContext } from "@/hooks/useFeedContext";
 import useGetFeedQuery from "@/hooks/useGetFeedQuery";
 import { LegendList } from "@legendapp/list";
-import { useIsFocused } from "@react-navigation/native";
 import { router, Stack } from "expo-router";
 import { useState } from "react";
-import { FlatList, RefreshControl, StyleSheet } from "react-native";
+import { FlatList, RefreshControl as Refresh, StyleSheet } from "react-native";
 
 const HomeScreen = () => {
   const [sheetVisible, setSheetVisible] = useState<boolean>(false);
   const { selectedCategory, setSelectedCategory } = useFeedContext();
-  const { data: feed, isFetching, refetch } = useGetFeedQuery(selectedCategory);
-  const isFocused = useIsFocused();
+  const { data: feed, refetch } = useGetFeedQuery(selectedCategory);
   const options = Object.keys(categories);
   const { mainArticle, subArticles, remainingArticles } = useDivideArticles(
     feed?.items ?? []
@@ -52,20 +50,15 @@ const HomeScreen = () => {
         estimatedItemSize={110}
         recycleItems
         keyExtractor={(item) => item.guid}
+        refreshControl={<Refresh refreshing={false} onRefresh={refetch} />}
+        ListHeaderComponent={listHeader}
+        ItemSeparatorComponent={() => <Divider style={styles.divider} />}
         renderItem={({ item: article }) => (
           <Article
             article={article}
             onPress={() => goToArticle(article.guid)}
           />
         )}
-        refreshControl={
-          <RefreshControl
-            refreshing={isFetching && isFocused}
-            onRefresh={refetch}
-          />
-        }
-        ListHeaderComponent={listHeader}
-        ItemSeparatorComponent={() => <Divider style={styles.divider} />}
       />
 
       {/* Category selector */}

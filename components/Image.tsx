@@ -1,6 +1,5 @@
-import { StyleSheet } from "react-native";
-import React, { memo } from "react";
 import { Image as ExpoImage, ImageProps } from "expo-image";
+import React, { memo } from "react";
 
 type Props = {
   height?: number;
@@ -14,5 +13,3 @@ const Image = ({ height = 50, width = 50, ...imageProps }: Props) => {
 };
 
 export default memo(Image);
-
-const styles = StyleSheet.create({});

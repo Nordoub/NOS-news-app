@@ -1,10 +1,10 @@
-import { Dimensions, StyleSheet, Text, View } from "react-native";
-import React, { memo } from "react";
-import MainArticle from "./MainArticle";
 import { Article } from "@/models/article";
-import SubArticle from "./SubArticle";
-import Row from "../Row";
+import React, { memo } from "react";
+import { Dimensions, StyleSheet, View } from "react-native";
 import Divider from "../Divider";
+import Row from "../Row";
+import MainArticle from "./MainArticle";
+import SubArticle from "./SubArticle";
 
 type Props = {
   mainArticle: Article;
